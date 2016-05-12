@@ -1,0 +1,11 @@
+[~, I] = sort(D, 2, 'descend');
+econo_most_likely = Vocabulary(I(1, 1:5), :)
+onion_most_likely = Vocabulary(I(2, 1:5), :)
+[~, I] = sort(D(1, :)./D(2, :), 2, 'descend');
+econo_unique = Vocabulary(I(1:5), :)
+[~, I] = sort(D(2, :)./D(1, :), 2, 'descend');
+onion_unique = Vocabulary(I(1:5), :)
+[~, I] = sort(D(1, :)./max(D(1, :)), 2, 'descend');
+econo_max = Vocabulary(I(1:5), :)
+[~, I] = sort(D(2, :)./max(D(2, :)), 2, 'descend');
+onion_max = Vocabulary(I(1:5), :)
