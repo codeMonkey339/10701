@@ -5,6 +5,10 @@ function [yHat] = NB_Classify(D, p, X)
 % yHat: yHat(i) is the predicated label for the ith row of X
 
 % todo: make use of matrix multiplication to simplify calculation
-
-
+appear_sum = X * D';
+absence_sum = (1 - X) * (1 - D)';
+conditional_prob = appear_sum + absence_sum;
+replicated_p = repmat(p, 1, size(X, 2));
+log_map = logProd(log(replicated_p), log(X'))';
+yHat = max(log_map);
 end
