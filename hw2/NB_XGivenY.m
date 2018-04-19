@@ -8,13 +8,13 @@ function [D] = NB_XGivenY(XTrain, YTrain)
 % D: 2 * V dimensional vector
 econ_rows = find(YTrain == 1);
 onion_rows = find(YTrain == 2);
-ecno_data = XTrain(econ_rows);
-onion_data = XTrain(onion_data);
+econ_data = XTrain(econ_rows, :);
+onion_data = XTrain(onion_rows, :);
 
 
 % MAP of bernoulli with Beta prior is basically adding alpha and beta
 % to the numerator and denominator respectively
-D = [(sum(econ_data) + 0.001) / (length(Econ_data) + 0.901);
+D = [(sum(econ_data) + 0.001) / (length(econ_data) + 0.901);
 (sum(onion_data) + 0.001) / (length(onion_data) + 0.901)];
 
 end
