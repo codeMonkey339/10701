@@ -7,7 +7,9 @@ function [yHat] = NB_Classify(D, p, X)
 appear_sum = X * D';
 absence_sum = (1 - X) * (1 - D)';
 conditional_prob = appear_sum + absence_sum;
-replicated_p = repmat(p, 1, size(X, 2));
-log_map = logProd(log(replicated_p), log(X'))';
-yHat = max(log_map);
+replicated_p = repmat(p, 1, size(X, 1));
+%log_map = logProd(log(replicated_p), log(conditional_prob'))';
+log_map = log(replicated_p) + log(conditional_prob');
+[maxElem, indices] = max(log_map);
+yHat = indices';
 end
