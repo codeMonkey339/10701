@@ -16,7 +16,7 @@ onion_data = XTrain(onion_rows, :);
 
 % MAP of bernoulli with Beta prior is basically adding alpha and beta
 % to the numerator and denominator respectively
-D = [(sum(econ_data,1) + 0.001) / (size(econ_data,1) + 0.901);
-(sum(onion_data,1) + 0.001) / (size(onion_data, 1) + 0.901)];
+D = [(sum(econ_data,1) + 1.001) / (size(econ_data,1) + 2.901);
+(sum(onion_data,1) + 1.001) / (size(onion_data, 1) + 2.901)];
 
 end
