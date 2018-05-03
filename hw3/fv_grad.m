@@ -4,15 +4,12 @@ function [f,g] = fv_grad(w, X, y)
   % w is current weight vector (d * 1)
   % X is feature values (d * n)
   % y is label (1 * n)
+
+  lambda = 2; % the default coefficient for regularization
+  mask = ones(1, length(w));
+  mask(1,1) = 0;
   
-  prod = (w' * X)';
-  class1_loglikelihood = y' .* log(1 + exp(-1 * prod));
-  class2_loglikelihood = (1 - y)' .* log(1 + exp(prod));
-  loglikelihood = class1_loglikelihood + class2_loglikelihood;
-  
-  class1_gradient = y' * (bsxfun(@rdivide, -1 * X, (1 + exp(prod))'));
-  class2_gradient = (1 - y)' * (bsxfun(@rdivide, X, (1 + exp(-prod))));
-  
-  f = class1_loglikelihood + class2_loglikelihood;
-  g = class1_gradient + class2_loglikelihood;
+  sigmoid = sigmoid(w' * X); % evaluate the sigmoid function
+  f = -log(sigmoid) .* y' - log(1 - sigmoid) *. (1 - y)' +  lambda * (w' * w)/2;
+  g = -X * (y - sigmoid)' + lambda * mask .* w;
   end
