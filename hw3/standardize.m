@@ -5,7 +5,7 @@ function [Xnew] = standardize(X)
   % dimension(X): d * n --> each column represents an image
   
   X = bsxfun(@minus, X, mean(X));
-  Xnew = bsxfun(@rdivide, X, std(A));  
+  Xnew = bsxfun(@rdivide, X, std(X));  
   % alternative implementation
   % (A - mean(A)) ./ std(A)
   

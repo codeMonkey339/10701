@@ -6,10 +6,10 @@ function [f,g] = fv_grad(w, X, y)
   % y is label (1 * n)
 
   lambda = 2; % the default coefficient for regularization
-  mask = ones(1, length(w));
+  mask = ones(length(w), 1);
   mask(1,1) = 0;
   
   sigmoid = sigmoid(w' * X); % evaluate the sigmoid function
-  f = -log(sigmoid) .* y' - log(1 - sigmoid) *. (1 - y)' +  lambda * (w' * w)/2;
+  f = -log(sigmoid) .* y' - log(1 - sigmoid) .* (1 - y)' +  lambda * (w' * w)/2;
   g = -X * (y - sigmoid)' + lambda * mask .* w;
   end
