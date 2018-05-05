@@ -8,13 +8,19 @@ function [w, b, obj_val] = dual(X,Y)
 
 %todo: implement the optimization
 
-C = 1; % the upper bound for params
-lb = 0;
-X = [X ones(size(X, 1), 1];
-H = X * X';
-f = ones(size(X, 2), 1);
-[alpha, fval, exitflag, output, lambda] = quadprog(H, f, [], [], Y', lb, C];
-b = w(length(alpha));
-w = w(1: length(alpha)-1);
+C = ones(size(X, 1), 1); % the upper bound for params
+lb = zeros(size(X, 1), 1);
+Y = double(Y);
+Y_replicated = repmat(Y, 1, size(X, 2));
+H = X .* Y_replicated;
+H = H * H';
+f = -1 * ones(size(X, 1), 1);
+beq = [0];
+[alpha, fval, exitflag, output, lambda] = quadprog(H, f, [], [], Y', beq, lb, C);
+w = X' * (Y .* alpha);
+alpha_nonzero = find(alpha > 0 & alpha != C(1));
+b = Y(alpha_nonzero(1)) - w' * X(alpha_nonzero(1), :)';
 obj_val = fval;
-w = X' * (Y .* w');
+end
+
+% find b from the value of w

@@ -5,8 +5,10 @@ function [Y] = test(X, w, b)
 % X: testing feature matrix: n * d
 % w: weight vector: d * 1
 % b: the offset term
+% @return
+% Y: 1 * n vector
 
 prod = X * w + b;
-Y = prod >= 0;
+Y = (prod >= 0)';
 
 end
