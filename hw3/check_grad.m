@@ -1,1 +1,0 @@
-% use finite difference test to check that your implementation is correct
