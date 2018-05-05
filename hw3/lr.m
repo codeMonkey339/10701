@@ -2,6 +2,7 @@ load ('data/lr_data.mat')
 
 % assume XTrain, YTrain, XTest, YTest is there
 XTrain = standardize(XTrain);
+XTest = standardize(XTest);
 w0 = ones(size(XTrain, 1), 1);
 w = lr_gd(w0, XTrain, YTrain);
 yTrainPred = lr_pred(w, XTrain);
