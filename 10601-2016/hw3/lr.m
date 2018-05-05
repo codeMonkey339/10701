@@ -1,4 +1,6 @@
 load ('data/lr_data.mat')
+% todo: need to add one more column for the feature matrix which is used for bia
+% term.
 
 % assume XTrain, YTrain, XTest, YTest is there
 XTrain = standardize(XTrain);
