@@ -1,8 +1,8 @@
 load ('./news.mat');
-pkg load optim
+%pkg load optim
 
 % todo: need to replace the name of variables here and check dims
-%X_train = standardize(X_train);
+% X_train = standardize(X_train);
 [w1, b1, fval1] = dual(X_train, y_train');
 Ytest_dual = test(X_test,w1, b1);
 Ytrain_dual = test(X_train, w1, b1);
