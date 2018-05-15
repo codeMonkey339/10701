@@ -9,6 +9,6 @@ function [Y] = test(X, w, b)
 % Y: 1 * n vector
 
 prod = X * w + b;
-Y = (prod >= 0)';
+Y = sign(prod);
 
 end
