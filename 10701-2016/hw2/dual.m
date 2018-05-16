@@ -7,7 +7,7 @@ function [w, b, obj_val] = dual(X,Y)
 % obj_val: the optimal objective value
 
 %todo: implement the optimization
-C_coeff = 10^0;
+C_coeff = 10^-1;
 C = double( C_coeff * ones(size(X, 1), 1)); % the upper bound for params
 lb = double(zeros(size(X, 1), 1));
 Y = double(Y);
