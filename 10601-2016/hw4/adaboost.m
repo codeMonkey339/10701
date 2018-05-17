@@ -6,7 +6,6 @@ function [pred] = adaboost(trainX, trainY, testX, T)
 % T: number of iterations
 %
 % pred: n * 1 vector 
-models = cell(T);
 weight = 1 / size(trainX, 1) * ones(size(trainX, 1));
 for i=1:T
     models(i) = train_base(trainX, trainY, weight);
