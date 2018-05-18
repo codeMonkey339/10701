@@ -32,10 +32,16 @@ if abs(errorWeight) < 1e-3
 else
     modelWeight = 0.5 * log((1 - errorWeight) / errorWeight);
 end
+fprintf('error weight %d\n', errorWeight);
 updatedDataWeight = weight .* (exp(-1 * modelWeight * (2*(classification == YTrain) - 1)));
 model.weight = updatedDataWeight / sum(updatedDataWeight);
 model.alpha = modelWeight;
 model.dim = dim;
 model.direction = dir;
 model.pos = pos;
+if dir == 1
+    plot([pos pos], [-2 2]);
+else
+    plot([-2 2], [pos pos]);
+end
 end
