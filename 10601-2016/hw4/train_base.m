@@ -27,9 +27,13 @@ for i = 1: size(XTrain, 2)
 end
 classRes = (YTrain ~= classification);
 errorWeight = weight' * classRes;
-modelWeight = 0.5 * log((1 - errorWeight) / errorWeight);
+if abs(errorWeight) < 1e-3
+    modelWeight = 100; % random large weight for 100% accuracy
+else
+    modelWeight = 0.5 * log((1 - errorWeight) / errorWeight);
+end
 updatedDataWeight = weight .* (exp(-1 * modelWeight * (2*(classification == YTrain) - 1)));
-model.weight = updatedDataWeight;
+model.weight = updatedDataWeight / sum(updatedDataWeight);
 model.alpha = modelWeight;
 model.dim = dim;
 model.direction = dir;

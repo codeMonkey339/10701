@@ -6,7 +6,7 @@ function [pred] = predict(XTest, models)
 pred = zeros(1, size(XTest,1));
 for i = 1: size(XTest,1)
     sum = 0;
-    for j = 1: size(models,1)
+    for j = 1: size(models,2)
         val = XTest(i, models(i).dim);
         if val < models(i).pos
             if models(i).direction == 1
@@ -23,4 +23,6 @@ for i = 1: size(XTest,1)
         end
     end
     pred(i) = sum >= 0;
+end
+pred = pred';
 end
