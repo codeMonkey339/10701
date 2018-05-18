@@ -1,7 +1,4 @@
 %%%%%%%%%%%%%%%%%%%%%% main script for adaboost %%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 nTrain = 10000;
 nTest = 2000;
 T = 100; % # of iterations

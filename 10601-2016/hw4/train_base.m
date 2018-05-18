@@ -22,11 +22,13 @@ for i = 1: size(XTrain, 2)
         dir = curModel.dir;
         dim = curModel.axis;
         classification = curModel.classification;
+        maxWeight = curModel.accWeight;
     end
 end
-errorWeight = weight' * (YTrain == classification);
+classRes = (YTrain ~= classification);
+errorWeight = weight' * classRes;
 modelWeight = 0.5 * log((1 - errorWeight) / errorWeight);
-updatedDataWeight = weight .* (exp(-1 * modelWeight * classification));
+updatedDataWeight = weight .* (exp(-1 * modelWeight * (2*(classification == YTrain) - 1)));
 model.weight = updatedDataWeight;
 model.alpha = modelWeight;
 model.dim = dim;
